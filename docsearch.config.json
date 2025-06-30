@@ -1,0 +1,17 @@
+{
+  "appId": "0K8AJHKHYY",
+  "apiKey": "4b88196b4994088e4c30c551185e1c34",
+  "indexName": "MooreIndex",
+  "startUrls": ["http://10.0.0.200/docs/intro"],
+  "renderJavaScript": true,
+  "indexHeadings": true,
+
+  "selectors": {
+    "lvl0": {
+      "selector": ".navbar__title",
+      "defaultValue": "Documentation"
+    },
+    "text": "body"
+  }
+}
+

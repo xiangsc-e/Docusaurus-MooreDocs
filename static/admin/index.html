@@ -3,34 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <title>Content Manager</title>
-
-    <!-- ✅ Netlify Identity Widget 必须放这里 -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div id="nc-root"></div>
-
-    <!-- ✅ Netlify CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-
-    <!-- ✅ 手动初始化并支持注册邀请链接 -->
     <script>
-      // 延迟一点时间确保 identity widget 被正确挂载
-      setTimeout(function () {
+      function handleInviteToken() {
+        const hash = window.location.hash;
+        if (hash.startsWith('#invite_token=')) {
+          console.log("Invite token detected:", hash);
+          window.netlifyIdentity.open(); // ✅ 主动打开注册弹窗
+          window.netlifyIdentity.on('login', () => {
+            window.location.href = '/admin/';
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 等待 netlifyIdentity 初始化
         if (window.netlifyIdentity) {
           window.netlifyIdentity.on("init", (user) => {
-            if (!user && window.location.hash.startsWith("#invite_token")) {
-              window.netlifyIdentity.on("login", () => {
-                document.location.href = "/admin/";
-              });
-              window.netlifyIdentity.open(); // 打开注册弹窗
+            if (!user) {
+              handleInviteToken();
             }
           });
           window.netlifyIdentity.init();
         } else {
-          console.error("Netlify Identity 未加载成功！");
+          console.error("Netlify Identity script not loaded.");
         }
-      }, 500); // 延迟初始化是关键 🔑
+      });
     </script>
   </body>
 </html>

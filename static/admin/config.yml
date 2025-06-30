@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: xiangsc-e/Dosusaurus-MooreDocs.git
+  branch: main # 根据你仓库的分支调整
+  base_url: https://api.netlify.com
+  auth_endpoint: auth # 后续用 Netlify Identity
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "docs"
+    label: "Docs"
+    folder: "docs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+

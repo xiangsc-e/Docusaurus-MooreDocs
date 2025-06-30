@@ -3,34 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <title>Content Manager</title>
+    <!-- ✅ 必须在 head 中加载 Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div id="nc-root"></div>
+    <!-- ✅ Netlify CMS 主脚本 -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-    <script>
-      function handleInviteToken() {
-        const hash = window.location.hash;
-        if (hash.startsWith('#invite_token=')) {
-          console.log("Invite token detected:", hash);
-          window.netlifyIdentity.open(); // ✅ 主动打开注册弹窗
-          window.netlifyIdentity.on('login', () => {
-            window.location.href = '/admin/';
-          });
-        }
-      }
 
+    <!-- ✅ 注册 invite_token 的弹窗逻辑 -->
+    <script>
+      // 等待页面加载完成
       document.addEventListener("DOMContentLoaded", function () {
-        // 等待 netlifyIdentity 初始化
+        function openInviteIfNeeded() {
+          const hash = window.location.hash;
+          if (hash.startsWith("#invite_token=")) {
+            console.log("🔑 邀请链接识别成功，准备弹窗注册");
+            window.netlifyIdentity.open(); // 弹窗
+            window.netlifyIdentity.on("login", () => {
+              window.location.href = "/admin/";
+            });
+          }
+        }
+
+        // 主动初始化 Netlify Identity
         if (window.netlifyIdentity) {
-          window.netlifyIdentity.on("init", (user) => {
+          // 一定要在 init 完成后再操作
+          window.netlifyIdentity.on("init", user => {
             if (!user) {
-              handleInviteToken();
+              openInviteIfNeeded();
             }
           });
-          window.netlifyIdentity.init();
+          window.netlifyIdentity.init(); // ✅ 触发内部初始化
         } else {
-          console.error("Netlify Identity script not loaded.");
+          console.error("❌ Netlify Identity 未加载，请检查 script 标签是否丢失");
         }
       });
     </script>

@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: xiangsc-e/Docusaurus-MooreDocs
+  #repo: xiangsc-e/Docusaurus-MooreDocs
   branch: main # 根据你仓库的分支调整
   #base_url: https://api.netlify.com
   #auth_endpoint: auth # 后续用 Netlify Identity

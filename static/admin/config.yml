@@ -1,5 +1,5 @@
 backend:
-  name: github
+  name: git-gateway
   #repo: xiangsc-e/Docusaurus-MooreDocs
   branch: main # 根据你仓库的分支调整
   #base_url: https://api.netlify.com

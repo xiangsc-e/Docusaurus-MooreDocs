@@ -3,23 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <title>Content Manager</title>
+
+    <!-- ✅ 加载 Netlify Identity Widget 提前放到 head -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-      <script>
-       if (window.netlifyIdentity) {
-         window.netlifyIdentity.on("init", (user) => {
-           if (!user) {
-             window.netlifyIdentity.on("login", () => {
-               document.location.href = "/admin/";
+    <div id="nc-root"></div>
+
+    <!-- ✅ Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+
+    <!-- ✅ 手动初始化 Netlify Identity，处理邀请注册 -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          // 如果是注册用户，自动触发注册流程
+          if (!user && window.location.hash.startsWith("#invite_token")) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
             });
+            // ✅ 主动打开注册弹窗
+            window.netlifyIdentity.open();
           }
         });
         window.netlifyIdentity.init();
-       }
-      </script>
-    <div id="nc-root"></div>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+      }
+    </script>
   </body>
 </html>
 

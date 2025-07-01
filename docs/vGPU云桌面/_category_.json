@@ -1,0 +1,8 @@
+{
+  "label": "vGPU云桌面",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "云桌面加速"
+  }
+}

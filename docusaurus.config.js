@@ -63,7 +63,7 @@ const config = {
       ({
         indexDocs: true,
         indexPages: true,
-        language: ['en'],
+        language: ['en','zh'],
         /*docsRouteBasePath: '/docs', // 如果你的 docs 是在根路径 '/', 改为 '/'*/
       }),
     ],

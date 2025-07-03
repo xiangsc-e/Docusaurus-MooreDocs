@@ -40,3 +40,9 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* 隐藏右上角导航栏中的搜索框*/
+.navbar .navbar__search {
+  display: none !important;
+}
+

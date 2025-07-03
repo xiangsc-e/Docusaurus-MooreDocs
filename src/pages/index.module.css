@@ -7,7 +7,8 @@
   padding: 4rem 0;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow: visible;
 }
 
 @media screen and (max-width: 996px) {
@@ -23,8 +24,26 @@
 }
 
 .searchBox {
-  margin-top: 5rem;
+  margin-top: 2rem;
   max-width: 150px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.searchWrapper {
+  margin-top: 2rem;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 搜索框美化 */
+.searchWrapper input {
+  font-size: 1.25rem;
+  padding: 1.2rem 1.5rem;
+  height: 48px;
+  border-radius: 2rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  width: 100%;
+  box-sizing: border-box;
 }

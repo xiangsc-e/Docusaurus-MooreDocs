@@ -9,6 +9,7 @@ import styles from './index.module.css';
 {/*新增模块*/}
 import { DocSearch } from '@docsearch/react';
 import '@docsearch/css';
+import SearchBar from '@theme/SearchBar';
 
 
 function HomepageHeader() {
@@ -20,23 +21,10 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-	{/*<div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
+	{/* define the local search module by self */}
+	<div className={styles.searchWrapper}>
+          <SearchBar />
         </div>
-	*/}
-	{/* 新增：搜索框 */}
-        <div className={styles.searchBox}>
-          <DocSearch
-            appId="YOUR_APP_ID"
-            indexName="YOUR_INDEX_NAME"
-            apiKey="YOUR_SEARCH_API_KEY"
-          />
-        </div>
-        {/* 结束*/}
       </div>
     </header>
   );
@@ -50,8 +38,9 @@ export default function Home() {
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+	  <HomepageFeatures />
       </main>
     </Layout>
   );
 }
+
